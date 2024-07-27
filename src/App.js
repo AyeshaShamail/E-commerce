@@ -8,6 +8,7 @@ import ProductDetail from "./components/ProductDetail";
 import Cart from "./components/Cart";
 import ErrorPage from "./components/ErrorPage";
 import { GlobalStyle } from "./GlobalStyle";
+import Header from "./components/Header";
 
 function App() {
   const theme = {
@@ -36,8 +37,9 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
       <Router>
+        <GlobalStyle />
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
