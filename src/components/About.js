@@ -1,7 +1,17 @@
-import React from "react";
+import { useProductsContext } from "../utils/productStore";
+import HeroSection from "./HeroSection";
 
 const About = () => {
-  return <div>About</div>;
+  const { myName } = useProductsContext();
+  const data = {
+    name: "Shamaya Store",
+  };
+  return (
+    <>
+      <h1>{myName}</h1>
+      <HeroSection myData={data} />
+    </>
+  );
 };
 
 export default About;

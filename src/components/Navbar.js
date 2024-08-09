@@ -178,7 +178,7 @@ const Navbar = () => {
               Home
             </NavLink>
           </li>
-          {/* <li>
+          <li>
             <NavLink
               to="/about"
               className="navbar-link home-link"
@@ -186,7 +186,7 @@ const Navbar = () => {
             >
               About
             </NavLink>
-          </li> */}
+          </li>
           <li>
             <NavLink
               to="/products"

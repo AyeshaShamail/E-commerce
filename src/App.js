@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import Home from "./components/Home";
-// import About from "./components/About";
+import About from "./components/About";
 import Contact from "./components/Contact";
 import Products from "./components/Products";
 import ProductDetail from "./components/ProductDetail";
@@ -43,7 +43,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/about" element={<About />} /> */}
+          <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/products" element={<Products />} />
           <Route path="/productDetail/:id" element={<ProductDetail />} />
