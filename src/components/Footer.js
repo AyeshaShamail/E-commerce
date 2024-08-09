@@ -162,6 +162,19 @@ const Footer = () => {
             </a>
           </div>
         </div>
+
+        <div className="footer-bottom--section">
+          <hr />
+          <div className="container grid grid-two-column">
+            <p>
+              @{new Date().getFullYear()} AyeshaShamail. All Rights Reserved
+            </p>
+            <div>
+              <p>PRIVACY POLICY</p>
+              <p>TERMS & CONDITIONS</p>
+            </div>
+          </div>
+        </div>
       </footer>
     </Wrapper>
   );
