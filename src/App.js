@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import Home from "./components/Home";
-import About from "./components/About";
+// import About from "./components/About";
 import Contact from "./components/Contact";
 import Products from "./components/Products";
 import ProductDetail from "./components/ProductDetail";
@@ -9,6 +9,7 @@ import Cart from "./components/Cart";
 import ErrorPage from "./components/ErrorPage";
 import { GlobalStyle } from "./GlobalStyle";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   const theme = {
@@ -42,13 +43,14 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          {/* <Route path="/about" element={<About />} /> */}
           <Route path="/contact" element={<Contact />} />
           <Route path="/products" element={<Products />} />
           <Route path="/productDetail/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
+        <Footer />
       </Router>
     </ThemeProvider>
   );
