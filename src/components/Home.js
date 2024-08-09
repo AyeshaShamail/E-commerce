@@ -1,4 +1,5 @@
 import HeroSection from "./HeroSection";
+import RecommendedProducts from "./RecommendedProducts";
 
 const Home = () => {
   const data = {
@@ -8,6 +9,7 @@ const Home = () => {
   return (
     <>
       <HeroSection myData={data} />
+      <RecommendedProducts />
     </>
   );
 };

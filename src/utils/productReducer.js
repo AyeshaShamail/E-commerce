@@ -7,15 +7,15 @@ const ProductReducer = (state, action) => {
       };
 
     case "SET_API_DATA":
-      const recommendedData = action.payload.filter((curELem) => {
-        return curELem.warrantyInformation === "Lifetime warranty";
+      const recommendedData = action.payload.products.filter((product) => {
+        return product.rating >= 4.5;
       });
 
       return {
         ...state,
         isLoading: false,
         products: action.payload,
-        recommendedProducts: recommendedData,
+        suggestedProducts: recommendedData,
       };
 
     case "MY_ERROR":
