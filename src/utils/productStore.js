@@ -12,6 +12,8 @@ const initialState = {
   isError: false,
   products: [],
   suggestedProducts: [],
+  isSingleLoading: false,
+  singleProducts: {},
 };
 
 const AppProvider = ({ children }) => {
@@ -23,11 +25,36 @@ const AppProvider = ({ children }) => {
       const res = await axios.get(url);
       const products = await res.data;
       dispatch({ type: "SET_API_DATA", payload: products });
-      // console.log(products);
+      // console.log("products", products);
       // console.log("Response:", res);
     } catch (error) {
       dispatch({ type: "MY_ERROR" });
       console.error("Error fetching products:", error);
+    }
+  };
+
+  // const getProductDetails = async (url) => {
+  //   dispatch({ type: "SET_SINGLE_PRODUCT_LOADING" });
+  //   try {
+  //     const res = await axios.get(url);
+  //     const singleProducts = await res.data.products;
+  //     dispatch({ type: "SET_SINGLEPRODUCT_DATA", payload: singleProducts });
+  //     // console.log("singleProducts", singleProducts);
+  //   } catch (error) {
+  //     dispatch({ type: "SINGLE_PRODUCT_ERROR" });
+  //     console.error("Error fetching product details:", error);
+  //   }
+  // };
+
+  const getProductDetails = async (url) => {
+    dispatch({ type: "SET_SINGLE_PRODUCT_LOADING" });
+    try {
+      const res = await axios.get(url);
+      const singleProduct = res.data; // Assuming data is the product object itself
+      dispatch({ type: "SET_SINGLEPRODUCT_DATA", payload: singleProduct });
+    } catch (error) {
+      dispatch({ type: "SINGLE_PRODUCT_ERROR" });
+      console.error("Error fetching product details:", error);
     }
   };
 
@@ -36,7 +63,9 @@ const AppProvider = ({ children }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ ...state, getProductDetails }}>
+      {children}
+    </AppContext.Provider>
   );
 };
 
