@@ -35,6 +35,7 @@ const Wrapper = styled.section`
   .grid-four-column {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 1fr);
+    margin-top: 10rem;
   }
 
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
@@ -44,6 +45,7 @@ const Wrapper = styled.section`
     .grid-four-column {
       grid-template-rows: 1fr;
       grid-template-columns: repeat(4, 1fr);
+      margin-left: 2rem;
     }
   }
 `;

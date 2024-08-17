@@ -8,6 +8,8 @@ import { Container } from "./Container";
 import FormatPrice from "../Helpers/FormatPrice";
 import { TbReplace, TbTruckDelivery } from "react-icons/tb";
 import { MdSecurity } from "react-icons/md";
+import Star from "./Star";
+import AddToCart from "./AddToCart";
 
 const Wrapper = styled.section`
   .container {
@@ -161,8 +163,7 @@ const ProductDetail = () => {
 
           <div className="product-data">
             <h2>{title}</h2>
-            <p>{rating} rating</p>
-            {/* <p>{reviews} reviews</p> */}
+            <Star stars={rating} reviews={reviews?.length} />
             <p className="product-data-price">
               MRP:{" "}
               <del>
@@ -211,6 +212,8 @@ const ProductDetail = () => {
                 Category: <span>{capitalizeFirstLetter(category)}</span>
               </p>
             </div>
+            <hr />
+            {stock > 0 && <AddToCart product={singleProducts} />}
           </div>
         </div>
       </Container>
