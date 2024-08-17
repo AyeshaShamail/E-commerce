@@ -9,7 +9,7 @@ import ErrorPage from "./components/ErrorPage";
 import { GlobalStyle } from "./GlobalStyle";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Product from "./components/Product";
+import Products from "./Products";
 
 function App() {
   const theme = {
@@ -45,7 +45,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/products" element={<Product />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/productDetail/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<ErrorPage />} />

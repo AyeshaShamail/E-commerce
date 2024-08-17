@@ -25,26 +25,11 @@ const AppProvider = ({ children }) => {
       const res = await axios.get(url);
       const products = await res.data;
       dispatch({ type: "SET_API_DATA", payload: products });
-      // console.log("products", products);
-      // console.log("Response:", res);
     } catch (error) {
       dispatch({ type: "MY_ERROR" });
       console.error("Error fetching products:", error);
     }
   };
-
-  // const getProductDetails = async (url) => {
-  //   dispatch({ type: "SET_SINGLE_PRODUCT_LOADING" });
-  //   try {
-  //     const res = await axios.get(url);
-  //     const singleProducts = await res.data.products;
-  //     dispatch({ type: "SET_SINGLEPRODUCT_DATA", payload: singleProducts });
-  //     // console.log("singleProducts", singleProducts);
-  //   } catch (error) {
-  //     dispatch({ type: "SINGLE_PRODUCT_ERROR" });
-  //     console.error("Error fetching product details:", error);
-  //   }
-  // };
 
   const getProductDetails = async (url) => {
     dispatch({ type: "SET_SINGLE_PRODUCT_LOADING" });
