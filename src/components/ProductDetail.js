@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { useProductsContext } from "../utils/productStore";
+import { useProductsContext } from "../utils/productContext";
 import PageNavigation from "./PageNavigation";
 import MyImage from "./MyImage";
 import { Container } from "./Container";
@@ -115,7 +115,7 @@ const Wrapper = styled.section`
 const API = "https://dummyjson.com/products";
 
 const ProductDetail = () => {
-  const { getProductDetails, isSingleLoading, singleProducts } =
+  const { getProductDetails, isSingleLoading, singleProduct } =
     useProductsContext();
 
   const { id } = useParams();
@@ -132,9 +132,7 @@ const ProductDetail = () => {
     stock,
     returnPolicy,
     images,
-  } = singleProducts;
-
-  console.log("singleProduct", singleProducts);
+  } = singleProduct;
 
   const discountPercentage = 25;
   const discountedPrice = price - price * (discountPercentage / 100);
@@ -213,7 +211,7 @@ const ProductDetail = () => {
               </p>
             </div>
             <hr />
-            {stock > 0 && <AddToCart product={singleProducts} />}
+            {stock > 0 && <AddToCart product={singleProduct} />}
           </div>
         </div>
       </Container>

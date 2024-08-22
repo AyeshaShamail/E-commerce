@@ -1,4 +1,4 @@
-import { useProductsContext } from "../utils/productStore";
+import { useProductsContext } from "../utils/productContext";
 import HeroSection from "./HeroSection";
 
 const About = () => {

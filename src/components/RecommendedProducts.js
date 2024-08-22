@@ -1,5 +1,5 @@
 import React from "react";
-import { useProductsContext } from "../utils/productStore";
+import { useProductsContext } from "../utils/productContext";
 import styled from "styled-components";
 import Product from "./Product";
 
@@ -45,7 +45,7 @@ const Wrapper = styled.section`
 
     .caption {
       position: absolute;
-      top: 15%;
+      top: 10%;
       right: 10%;
       text-transform: uppercase;
       background-color: ${({ theme }) => theme.colors.bg};
@@ -105,7 +105,6 @@ const Wrapper = styled.section`
 
 const RecommendedProducts = () => {
   const { isLoading, suggestedProducts } = useProductsContext();
-  console.log("suggestedProducts", suggestedProducts);
 
   return isLoading ? (
     <div>...............Loading</div>

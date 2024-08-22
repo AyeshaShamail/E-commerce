@@ -1,5 +1,5 @@
-import axios from "axios";
 import { createContext, useContext, useEffect, useReducer } from "react";
+import axios from "axios";
 import reducer from "./productReducer";
 
 const AppContext = createContext();
@@ -13,7 +13,7 @@ const initialState = {
   products: [],
   suggestedProducts: [],
   isSingleLoading: false,
-  singleProducts: {},
+  singleProduct: {},
 };
 
 const AppProvider = ({ children }) => {
@@ -23,7 +23,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "SET_LOADING" });
     try {
       const res = await axios.get(url);
-      const products = await res.data;
+      const products = await res.data?.products;
       dispatch({ type: "SET_API_DATA", payload: products });
     } catch (error) {
       dispatch({ type: "MY_ERROR" });
@@ -35,7 +35,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "SET_SINGLE_PRODUCT_LOADING" });
     try {
       const res = await axios.get(url);
-      const singleProduct = res.data; // Assuming data is the product object itself
+      const singleProduct = await res.data;
       dispatch({ type: "SET_SINGLEPRODUCT_DATA", payload: singleProduct });
     } catch (error) {
       dispatch({ type: "SINGLE_PRODUCT_ERROR" });

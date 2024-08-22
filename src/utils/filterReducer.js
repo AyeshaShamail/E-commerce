@@ -1,12 +1,10 @@
 const filterReducer = (state, action) => {
-  console.log("Action Payload:", action.payload);
   switch (action.type) {
     case "SHOW_FILTER_PRODUCTS":
-      const products = action.payload?.products || [];
       return {
         ...state,
-        filter_products: [...products],
-        all_products: [...products],
+        filter_products: [...action.payload],
+        all_products: [...action.payload],
       };
 
     case "SET_GRID_VIEW":
@@ -14,6 +12,42 @@ const filterReducer = (state, action) => {
         ...state,
         grid_view: true,
       };
+    case "SET_LIST_VIEW":
+      return {
+        ...state,
+        grid_view: false,
+      };
+
+    case "SORT":
+      let userSortValue = document.getElementById("sort");
+      let sort_value = userSortValue.options[userSortValue.selectedIndex].value;
+
+      return {
+        ...state,
+        sorting_value: sort_value,
+      };
+
+    case "SORTING_PRODUCTS":
+      let newSortData;
+      let tempSortProduct = [...action.payload];
+
+      if (state?.sort_value === "a-z") {
+        newSortData = tempSortProduct.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+      }
+
+      if (state?.sort_value === "z-a") {
+        newSortData = tempSortProduct.sort((a, b) =>
+          b.name.localeCompare(a.name)
+        );
+      }
+
+      return {
+        ...state,
+        filter_products: newSortData,
+      };
+
     default:
       return state;
   }

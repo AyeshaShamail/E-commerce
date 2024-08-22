@@ -7,7 +7,7 @@ const ProductReducer = (state, action) => {
       };
 
     case "SET_API_DATA":
-      const recommendedData = action.payload.products.filter((product) => {
+      const recommendedData = action.payload.filter((product) => {
         return product.rating >= 4.5;
       });
 
@@ -35,7 +35,7 @@ const ProductReducer = (state, action) => {
       return {
         ...state,
         isSingleLoading: false,
-        singleProducts: action.payload,
+        singleProduct: action.payload,
       };
 
     case "SINGLE_PRODUCT_ERROR":
