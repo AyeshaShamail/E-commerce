@@ -20,43 +20,30 @@ const filterReducer = (state, action) => {
       };
 
     case "GET_SORT_VALUE":
-      let userSortValue = document.getElementById("sort");
-      let sort_value = userSortValue.options[userSortValue.selectedIndex].value;
-
       return {
         ...state,
-        sorting_value: sort_value,
+        sorting_value: action.payload,
       };
 
     case "SORTING_PRODUCTS":
       let newSortData;
-      let tempSortProduct = [...action.payload];
+      const { filter_products, sorting_value } = state;
+      let tempSortProduct = [...filter_products];
 
-      if (state.sorting_value === "lowest") {
-        const sortingProducts = (a, b) => {
-          return a.price - b.price;
-        };
-        newSortData = tempSortProduct.sort(sortingProducts);
-      }
-
-      if (state.sorting_value === "highest") {
-        const sortingProducts = (a, b) => {
-          return b.price - a.price;
-        };
-        newSortData = tempSortProduct.sort(sortingProducts);
-      }
-
-      if (state.sorting_value === "a-z") {
-        newSortData = tempSortProduct.sort((a, b) =>
-          a.title.localeCompare(b.title)
-        );
-      }
-
-      if (state.sorting_value === "z-a") {
-        newSortData = tempSortProduct.sort((a, b) =>
-          b.title.localeCompare(a.title)
-        );
-      }
+      newSortData = tempSortProduct.sort((a, b) => {
+        switch (sorting_value) {
+          case "lowest":
+            return a.price - b.price;
+          case "highest":
+            return b.price - a.price;
+          case "a-z":
+            return a.title.localeCompare(b.title);
+          case "z-a":
+            return b.title.localeCompare(a.title);
+          default:
+            return 0;
+        }
+      });
 
       return {
         ...state,
