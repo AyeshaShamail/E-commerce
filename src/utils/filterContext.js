@@ -24,21 +24,21 @@ export const FilterContextProvider = ({ children }) => {
     return dispatch({ type: "SET_LIST_VIEW" });
   };
 
-  const handleSorting = () => {
-    return dispatch({ type: "SORT" });
+  const sorting = (action) => {
+    return dispatch({ type: "GET_SORT_VALUE", payload: action.payload });
   };
 
   useEffect(() => {
     dispatch({ type: "SORTING_PRODUCTS", payload: products });
-  }, [state?.sorting_value]);
+  }, [state?.sorting_value, products]);
 
   useEffect(() => {
-    dispatch({ type: "SHOW_FILTER_PRODUCTS", payload: products });
+    dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products });
   }, [products]);
 
   return (
     <FilterContext.Provider
-      value={{ ...state, setGridView, setListView, handleSorting }}
+      value={{ ...state, setGridView, setListView, sorting }}
     >
       {children}
     </FilterContext.Provider>

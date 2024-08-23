@@ -97,7 +97,7 @@ const GridView = ({ products }) => {
   return (
     <Wrapper className="section">
       <div className="container grid grid-three-column">
-        {products.map((curElem) => {
+        {products?.map((curElem) => {
           return <Product key={curElem.id} curElem={curElem} />;
         })}
       </div>

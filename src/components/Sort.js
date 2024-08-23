@@ -44,13 +44,9 @@ const Wrapper = styled.section`
 `;
 
 const Sort = () => {
-  const {
-    filter_products,
-    grid_view,
-    setGridView,
-    setListView,
-    handleSorting,
-  } = useFilterContext();
+  const { filter_products, grid_view, setGridView, setListView, sorting } =
+    useFilterContext();
+
   return (
     <Wrapper className="sort-section">
       <div className="sorting-list--grid">
@@ -79,7 +75,7 @@ const Sort = () => {
             name="sort"
             id="sort"
             className="sort-selection--style"
-            onClick={handleSorting}
+            onChange={sorting}
           >
             <option value="lowest">Price (Low - High)</option>
             <option value="highest">Price (High - Low)</option>
