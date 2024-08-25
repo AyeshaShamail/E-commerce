@@ -14,7 +14,7 @@ const Wrapper = styled.section`
   }
 
   .contact-short {
-    max-width: 60vw;
+    max-width: 50vw;
     margin: auto;
     padding: 5rem 10rem;
     background-color: ${({ theme }) => theme.colors.bg};
@@ -29,7 +29,7 @@ const Wrapper = styled.section`
   }
 
   footer {
-    padding: 14rem 0 9rem 0;
+    padding: 12rem 0 2rem 0;
     background-color: ${({ theme }) => theme.colors.footer_bg};
     h3 {
       color: ${({ theme }) => theme.colors.hr};
@@ -105,18 +105,10 @@ const Footer = () => {
       </section>
 
       <footer>
-        <div className="container grid grid-four-column">
+        <div className="container grid grid-three-column">
           <div className="footer-about">
             <h3>Developed by</h3>
             <p>Ayesha Shamail ❤️</p>
-          </div>
-
-          <div className="footer-subscribe">
-            <h3>Subscribe to get important updates</h3>
-            <form action="#">
-              <input type="email" placeholder="Your Email" />
-              <input type="submit" value="subscribe" />
-            </form>
           </div>
 
           <div className="footer-social">
@@ -167,11 +159,10 @@ const Footer = () => {
           <hr />
           <div className="container grid grid-two-column">
             <p>
-              @{new Date().getFullYear()} AyeshaShamail. All Rights Reserved
+              @{new Date().getFullYear()} Ayesha Shamail. All Rights Reserved
             </p>
             <div>
-              <p>PRIVACY POLICY</p>
-              <p>TERMS & CONDITIONS</p>
+              <p>Privacy Policy</p>
             </div>
           </div>
         </div>

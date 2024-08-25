@@ -52,6 +52,7 @@ const Contact = () => {
           <form
             action="https://formspree.io/f/mwpebbpr"
             method="POST"
+            target="_blank"
             className="contact-inputs"
           >
             <input

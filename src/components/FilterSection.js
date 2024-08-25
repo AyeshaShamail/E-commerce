@@ -45,7 +45,7 @@ const Wrapper = styled.section`
     }
   }
 
-  .filter-company--select {
+  .filter-brand--select {
     padding: 0.3rem 1.2rem;
     font-size: 1.6rem;
     color: ${({ theme }) => theme.colors.text};
@@ -112,8 +112,20 @@ const Wrapper = styled.section`
 const FilterSection = () => {
   const {
     filters: { text },
+    all_products,
     updateFilterValue,
   } = useFilterContext();
+
+  const getUniqueData = (data, prop) => {
+    let newValue = data.map((curElem) => {
+      return curElem[prop];
+    });
+    return (newValue = ["all", ...new Set(newValue)]);
+  };
+
+  const uniqueCategoryData = getUniqueData(all_products, "category");
+  const uniqueBrandData = getUniqueData(all_products, "brand");
+
   return (
     <Wrapper>
       <div className="filter-search">
@@ -125,6 +137,45 @@ const FilterSection = () => {
             value={text}
             onChange={updateFilterValue}
           />
+        </form>
+      </div>
+
+      <div className="filter-category">
+        <h3>Category</h3>
+        <div>
+          {uniqueCategoryData.map((curElem, index) => {
+            return (
+              <button
+                key={index}
+                type="button"
+                name="category"
+                value={curElem}
+                onClick={updateFilterValue}
+              >
+                {curElem}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="filter-brand">
+        <h3>Brands</h3>
+        <form action="#">
+          <select
+            id="brand"
+            name="brand"
+            className="filter-brand--select"
+            onChange={updateFilterValue}
+          >
+            {uniqueBrandData.map((curElem, index) => {
+              return (
+                <option key={index} value={curElem} name="brand">
+                  {curElem}
+                </option>
+              );
+            })}
+          </select>
         </form>
       </div>
     </Wrapper>

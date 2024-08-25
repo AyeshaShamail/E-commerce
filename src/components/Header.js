@@ -44,7 +44,7 @@ const Header = () => {
   return (
     <MainHeader>
       <NavLink to="/">
-        <img src="/logo12.png" alt="Logo" width={180} />
+        <img src="/logo12.png" alt="Logo" width={100} />
       </NavLink>
       {/* <div className="filter-search">
         <form onSubmit={(e) => e.preventDefault()}>

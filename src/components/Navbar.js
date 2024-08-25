@@ -10,7 +10,7 @@ import styled from "styled-components";
 const Nav = styled.nav`
   .navbar-lists {
     display: flex;
-    gap: 4.8rem;
+    gap: 1.8rem;
     align-items: center;
 
     .navbar-link {
@@ -58,8 +58,8 @@ const Nav = styled.nav`
     }
 
     .cart-total--item {
-      width: 2.4rem;
-      height: 2.4rem;
+      width: 2.5rem;
+      height: 2.5rem;
       position: absolute;
       background-color: #000;
       color: #000;
@@ -178,7 +178,7 @@ const Navbar = () => {
               Home
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink
               to="/about"
               className="navbar-link home-link"
@@ -186,7 +186,7 @@ const Navbar = () => {
             >
               About
             </NavLink>
-          </li>
+          </li> */}
           <li>
             <NavLink
               to="/products"
