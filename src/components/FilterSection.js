@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { useFilterContext } from "../utils/filterContext";
+import FormatPrice from "../Helpers/FormatPrice";
+import { Button } from "../styles/Button";
 
 const Wrapper = styled.section`
   padding: 5rem 0;
@@ -111,9 +113,10 @@ const Wrapper = styled.section`
 
 const FilterSection = () => {
   const {
-    filters: { text },
+    filters: { text, category, price, maxPrice, minPrice },
     all_products,
     updateFilterValue,
+    clearFilters,
   } = useFilterContext();
 
   const getUniqueData = (data, prop) => {
@@ -150,6 +153,7 @@ const FilterSection = () => {
                 type="button"
                 name="category"
                 value={curElem}
+                className={curElem === category ? "active" : ""}
                 onClick={updateFilterValue}
               >
                 {curElem}
@@ -177,6 +181,27 @@ const FilterSection = () => {
             })}
           </select>
         </form>
+      </div>
+
+      <div className="filter_price">
+        <h3>Price Range</h3>
+        <p>
+          <FormatPrice price={price} />
+        </p>
+        <input
+          type="range"
+          name="price"
+          min={minPrice}
+          max={maxPrice}
+          value={price}
+          onChange={updateFilterValue}
+        />
+      </div>
+
+      <div className="filter-clear">
+        <Button className="btn" onClick={clearFilters}>
+          Clear Filters
+        </Button>
       </div>
     </Wrapper>
   );
