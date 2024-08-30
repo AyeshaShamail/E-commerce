@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../styles/Button";
-import CartAmountToggle from "./CartAmountToggle";
+import CartAmountToggle from "../Helpers/CartAmountToggle";
+import { useCartContext } from "../utils/cartContext";
 
 const Wrapper = styled.section`
   .colors p {
@@ -58,26 +59,28 @@ const Wrapper = styled.section`
 `;
 
 const AddToCart = ({ product }) => {
-  const { stock } = product;
-  const [amount, setAmount] = useState(1);
+  const { id, stock } = product;
+  const [quantity, setQuantity] = useState(1);
+
+  const { addToCart } = useCartContext();
 
   const setDecrease = () => {
-    amount > 1 ? setAmount(amount - 1) : setAmount(1);
+    quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1);
   };
 
   const setIncrease = () => {
-    amount < stock ? setAmount(amount + 1) : setAmount(stock);
+    quantity < stock ? setQuantity(quantity + 1) : setQuantity(stock);
   };
 
   return (
     <Wrapper>
       <CartAmountToggle
-        amount={amount}
+        quantity={quantity}
         setDecrease={setDecrease}
         setIncrease={setIncrease}
       />
 
-      <NavLink to="/cart">
+      <NavLink to="/cart" onClick={() => addToCart(id, quantity, product)}>
         <Button className="btn">Add To Cart</Button>
       </NavLink>
     </Wrapper>
