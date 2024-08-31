@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.section`
-  height: 10rem;
+  height: 5rem;
   background-color: ${({ theme }) => theme.colors.bg};
   display: flex;
   justify-content: flex-start;
@@ -14,12 +14,17 @@ const Wrapper = styled.section`
   a {
     font-size: 3.2rem;
   }
+
+   @media (max-width: ${({ theme }) => theme.media.mobile}) {
+    height: 12rem;
+    }
+  }
 `;
 
 const PageNavigation = ({ title }) => {
   return (
     <Wrapper>
-      <NavLink to="/">Home</NavLink>/{title}
+      <NavLink to="/"> Home </NavLink> /{title}
     </Wrapper>
   );
 };

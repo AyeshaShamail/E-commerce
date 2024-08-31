@@ -6,6 +6,7 @@ import {
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { useCartContext } from "../utils/cartContext";
 
 const Nav = styled.nav`
   .navbar-lists {
@@ -19,7 +20,7 @@ const Nav = styled.nav`
         display: inline-block;
         text-decoration: none;
         font-size: 1.8rem;
-        margin-right: 2rem;
+        margin-right: 2.5rem;
         font-weight: 500;
         text-transform: uppercase;
         color: ${({ theme }) => theme.colors.black};
@@ -51,24 +52,22 @@ const Nav = styled.nav`
 
   .cart-trolley--link {
     position: relative;
-
-    .cart-trolley {
-      position: relative;
-      font-size: 3.2rem;
-    }
+    display: flex;
+    align-items: center;
+    font-size: 2.2rem !important;
 
     .cart-total--item {
       width: 2.5rem;
       height: 2.5rem;
       position: absolute;
-      background-color: #000;
-      color: #000;
+      background-color: ${({ theme }) => theme.colors.helper};
+      color: #fff;
       border-radius: 50%;
       display: grid;
       place-items: center;
-      top: -20%;
-      left: 70%;
-      background-color: ${({ theme }) => theme.colors.helper};
+      top: -60%;
+      left: 66%;
+      font-size: 1rem;
     }
   }
 
@@ -124,8 +123,7 @@ const Nav = styled.nav`
       visibility: hidden;
       opacity: 0;
       transform: translateX(100%);
-      /* transform-origin: top; */
-      transition: all 3s linear;
+      transition: all 0.3s linear;
     }
 
     .active .navbar-lists {
@@ -134,24 +132,23 @@ const Nav = styled.nav`
       transform: translateX(0);
       z-index: 999;
       transform-origin: right;
-      transition: all 3s linear;
+      transition: all 0.3s linear;
 
       .navbar-link {
         font-size: 2.2rem;
       }
     }
+
     .cart-trolley--link {
       position: relative;
+      font-size: 3.2rem !important;
 
-      .cart-trolley {
-        position: relative;
-        font-size: 5.2rem;
-      }
-
-      .cart-trolley--link .cart-total--item {
-        width: 4.2rem;
-        height: 4.2rem;
+      .cart-total--item {
+        width: 3.2rem;
+        height: 3.2rem;
         font-size: 2rem;
+        top: -41%;
+        left: 69%;
       }
     }
 
@@ -165,6 +162,7 @@ const Nav = styled.nav`
 
 const Navbar = () => {
   const [menuIcon, setMenuIcon] = useState();
+  const { total_item } = useCartContext();
   return (
     <Nav>
       <div className={menuIcon ? "navbar active" : "navbar"}>
@@ -196,7 +194,7 @@ const Navbar = () => {
               Products
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink
               to="/contact"
               className="navbar-link home-link"
@@ -204,7 +202,7 @@ const Navbar = () => {
             >
               Contact
             </NavLink>
-          </li>
+          </li> */}
           <li>
             <NavLink
               to="/cart"
@@ -212,7 +210,7 @@ const Navbar = () => {
               onClick={() => setMenuIcon(false)}
             >
               <ShoppingCartOutlined />
-              <span className="cart-total--item">10</span>
+              <span className="cart-total--item">{total_item}</span>
             </NavLink>
           </li>
         </ul>

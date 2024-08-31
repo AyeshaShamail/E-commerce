@@ -12,7 +12,7 @@ const initialState = {
   cart: getCartDataLocal(),
   total_item: 0,
   total_amount: 0,
-  shipping_charges: "10000",
+  shipping_charges: "4900",
 };
 
 const CartProvider = ({ children }) => {
@@ -26,17 +26,34 @@ const CartProvider = ({ children }) => {
     dispatch({ type: "REMOVE_ITEM", payload: id });
   };
 
+  const setDecrease = (id) => {
+    dispatch({ type: "SET_DECREASE", payload: id });
+  };
+
+  const setIncrease = (id) => {
+    dispatch({ type: "SET_INCREASE", payload: id });
+  };
+
   const clearCart = () => {
     dispatch({ type: "CLEAR_CART" });
   };
 
   useEffect(() => {
+    dispatch({ type: "TOTAL_CART_ITEM" });
+    dispatch({ type: "TOTAL_CART_PRICE" });
     localStorage.setItem("shamayaCart", JSON.stringify(state.cart));
   }, [state.cart]);
 
   return (
     <CartContext.Provider
-      value={{ ...state, addToCart, removeItem, clearCart }}
+      value={{
+        ...state,
+        addToCart,
+        removeItem,
+        clearCart,
+        setDecrease,
+        setIncrease,
+      }}
     >
       {children}
     </CartContext.Provider>

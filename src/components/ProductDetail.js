@@ -10,6 +10,7 @@ import { TbReplace, TbTruckDelivery } from "react-icons/tb";
 import { MdSecurity } from "react-icons/md";
 import Star from "./Star";
 import AddToCart from "./AddToCart";
+import DiscountPrice from "../Helpers/DiscountPrice";
 
 const Wrapper = styled.section`
   .container {
@@ -102,6 +103,9 @@ const Wrapper = styled.section`
 
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
     padding: 0 2.4rem;
+    .container {
+      padding: 0;
+    }
     .product-reviews {
       width: 100%;
     }
@@ -134,9 +138,6 @@ const ProductDetail = () => {
     images,
   } = singleProduct;
 
-  const discountPercentage = 25;
-  const discountedPrice = price - price * (discountPercentage / 100);
-
   const capitalizeFirstLetter = (str) => {
     if (!str) return "";
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -153,7 +154,7 @@ const ProductDetail = () => {
   return (
     <Wrapper>
       <PageNavigation title={title} />
-      <Container className="cntainer">
+      <Container className="container">
         <div className="grid grid-two-column">
           <div className="product_images">
             <MyImage imgs={images} />
@@ -164,14 +165,20 @@ const ProductDetail = () => {
             <Star stars={rating} reviews={reviews?.length} />
             <p className="product-data-price">
               MRP:{" "}
-              <del>
+              {price > 49 ? (
+                <del>
+                  <FormatPrice price={price} />
+                </del>
+              ) : (
                 <FormatPrice price={price} />
-              </del>
+              )}
             </p>
 
-            <p className="product-data-price product-data-real-price">
-              Deal of the Day: <FormatPrice price={discountedPrice} />
-            </p>
+            {price > 49 && (
+              <p className="product-data-price product-data-real-price">
+                Deal of the Day: <DiscountPrice price={price} />
+              </p>
+            )}
             <h3>About Product</h3>
             <p>{description}</p>
 

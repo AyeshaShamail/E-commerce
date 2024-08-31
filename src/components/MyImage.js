@@ -34,7 +34,7 @@ const Wrapper = styled.section`
   }
   .grid-four-column {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 0fr);
     margin-top: 10rem;
   }
 

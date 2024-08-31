@@ -3,6 +3,7 @@ import styled from "styled-components";
 import FormatPrice from "../Helpers/FormatPrice";
 import { NavLink } from "react-router-dom";
 import { Button } from "../styles/Button";
+import DiscountPrice from "../Helpers/DiscountPrice";
 
 const Wrapper = styled.section`
   padding: 9rem 0;
@@ -104,9 +105,22 @@ const ListView = ({ products }) => {
 
               <div className="card-data">
                 <h3>{title}</h3>
-                <p>
-                  <FormatPrice price={price} />
+                <p className="product-data-price">
+                  MRP:{" "}
+                  {price > 49 ? (
+                    <del>
+                      <FormatPrice price={price} />
+                    </del>
+                  ) : (
+                    <FormatPrice price={price} />
+                  )}
                 </p>
+
+                {price > 49 && (
+                  <p>
+                    <b>Deal of the Day:</b> {<DiscountPrice price={price} />}
+                  </p>
+                )}
                 <p>{description.slice(0, 90)}...</p>
 
                 <NavLink to={`/productDetail/${id}`} className="btn-main">

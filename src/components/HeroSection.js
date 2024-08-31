@@ -82,8 +82,8 @@ const HeroSection = ({ myData }) => {
               This is a E-commerce store built to buy some products online
               through our Shamaya Store.
             </p>
-            <NavLink>
-              <Button>show now</Button>
+            <NavLink to="/products">
+              <Button>Show Now</Button>
             </NavLink>
           </div>
           {/* our homepage image  */}

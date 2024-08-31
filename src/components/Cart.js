@@ -4,6 +4,7 @@ import { useCartContext } from "../utils/cartContext";
 import CartItem from "./CartItem";
 import { NavLink } from "react-router-dom";
 import { Button } from "../styles/Button";
+import FormatPrice from "../Helpers/FormatPrice";
 
 const Wrapper = styled.section`
   padding: 9rem 0;
@@ -98,6 +99,20 @@ const Wrapper = styled.section`
     transition: transform 0.3s ease-in-out;
   }
 
+  .shipping-message {
+    font-size: 1.6rem;
+    color: #e74c3c;
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  .additional-amount {
+    font-size: 1.6rem;
+    color: #2c3e50;
+    margin: 2rem 0;
+    text-align: center;
+  }
+
   .amount-toggle {
     display: flex;
     justify-content: center;
@@ -189,8 +204,13 @@ const Wrapper = styled.section`
 `;
 
 const Cart = () => {
-  const { cart, clearCart } = useCartContext();
-  console.log("cart", cart);
+  const { cart, clearCart, total_amount, shipping_charges } = useCartContext();
+
+  const adjustedShippingCharges =
+    total_amount > 299 ? 0 : shipping_charges / 100;
+  const orderTotal = total_amount + adjustedShippingCharges;
+
+  const amountNeeded = 299 - total_amount;
 
   if (!cart || cart.length === 0) {
     return (
@@ -227,6 +247,18 @@ const Cart = () => {
         </div>
         <hr />
 
+        {total_amount <= 299 && (
+          <>
+            <p className="shipping-message">
+              Your cart value is less than 299. Shipping charges will be added.
+            </p>
+            <p className="additional-amount">
+              Add <FormatPrice price={amountNeeded} /> more to your cart to
+              avoid shipping charges!
+            </p>
+          </>
+        )}
+
         <div className="cart-two-button">
           <NavLink to="/products">
             <Button>Continue Shopping</Button>
@@ -234,6 +266,31 @@ const Cart = () => {
           <Button className="btn btn-clear" onClick={clearCart}>
             Clear Cart
           </Button>
+        </div>
+
+        <div className="order-total--amount">
+          <div className="order-total--subdata">
+            <div>
+              <p>Sub Total : </p>
+              <p>
+                <FormatPrice price={total_amount} />
+              </p>
+            </div>
+            <div>
+              <p>Shipping Charges :</p>
+              <p>
+                <FormatPrice price={adjustedShippingCharges} />
+              </p>
+            </div>
+            <hr />
+
+            <div>
+              <p>Order Total :</p>
+              <p>
+                <FormatPrice price={orderTotal} />
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </Wrapper>

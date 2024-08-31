@@ -1,17 +1,20 @@
 import { FaTrash } from "react-icons/fa";
-import FormatPrice from "../Helpers/FormatPrice";
+import DiscountPrice from "../Helpers/DiscountPrice";
 import CartAmountToggle from "../Helpers/CartAmountToggle";
 import { useCartContext } from "../utils/cartContext";
+import FormatPrice from "../Helpers/FormatPrice";
 
 const CartItem = ({ id, title, images, price, quantity }) => {
-  const { removeItem } = useCartContext();
-  const setDecrease = () => {
-    // quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1);
-  };
+  const { removeItem, setDecrease, setIncrease } = useCartContext();
 
-  const setIncrease = () => {
-    // quantity < stock ? setQuantity(quantity + 1) : setQuantity(stock);
-  };
+  const subtotalBeforeDiscount = price * quantity;
+
+  const discountPercentage = 25;
+  const discountedSubtotal =
+    price > 49
+      ? subtotalBeforeDiscount * (1 - discountPercentage / 100)
+      : subtotalBeforeDiscount;
+
   return (
     <div className="cart_heading grid grid-five-column">
       <div className="cart-image--name">
@@ -26,21 +29,31 @@ const CartItem = ({ id, title, images, price, quantity }) => {
       </div>
 
       <div className="cart-hide">
-        <p>
-          <FormatPrice price={price} />
-        </p>
+        {price > 49 ? (
+          <p>
+            <DiscountPrice price={price} />
+          </p>
+        ) : (
+          <p>{<FormatPrice price={price} />}</p>
+        )}
       </div>
 
       <CartAmountToggle
         quantity={quantity}
-        setDecrease={setDecrease}
-        setIncrease={setIncrease}
+        setDecrease={() => setDecrease(id)}
+        setIncrease={() => setIncrease(id)}
       />
 
       <div className="cart-hide">
-        <p>
-          <FormatPrice price={price * quantity} />
-        </p>
+        {price > 49 ? (
+          <p>
+            <FormatPrice price={discountedSubtotal} />
+          </p>
+        ) : (
+          <p>
+            <FormatPrice price={subtotalBeforeDiscount} />
+          </p>
+        )}
       </div>
 
       <div>
