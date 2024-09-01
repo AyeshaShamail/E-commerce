@@ -39,8 +39,10 @@ const CartProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    dispatch({ type: "TOTAL_CART_ITEM" });
-    dispatch({ type: "TOTAL_CART_PRICE" });
+    // dispatch({ type: "TOTAL_CART_ITEM" });
+    // dispatch({ type: "TOTAL_CART_PRICE" });
+
+    dispatch({ type: "TOTAL_CART_PRICE_ITEM" });
     localStorage.setItem("shamayaCart", JSON.stringify(state.cart));
   }, [state.cart]);
 

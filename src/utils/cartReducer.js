@@ -97,40 +97,70 @@ const cartReducer = (state, action) => {
     };
   }
 
-  if (action.type === "TOTAL_CART_ITEM") {
-    let updatedItemValue = state.cart.reduce((acc, cur) => {
-      let { quantity } = cur;
+  // if (action.type === "TOTAL_CART_ITEM") {
+  //   let updatedItemValue = state.cart.reduce((acc, cur) => {
+  //     let { quantity } = cur;
 
-      acc = acc + quantity;
-      return acc;
-    }, 0);
-    return {
-      ...state,
-      total_item: updatedItemValue,
-    };
-  }
+  //     acc = acc + quantity;
+  //     return acc;
+  //   }, 0);
+  //   return {
+  //     ...state,
+  //     total_item: updatedItemValue,
+  //   };
+  // }
 
-  if (action.type === "TOTAL_CART_PRICE") {
+  // if (action.type === "TOTAL_CART_PRICE") {
+  //   const discountPercentage = 25;
+
+  //   let total_amount = state.cart.reduce((acc, cur) => {
+  //     let { price, quantity } = cur;
+  //     const subtotalBeforeDiscount = price * quantity;
+  //     const discountedPrice =
+  //       price > 99
+  //         ? subtotalBeforeDiscount * (1 - discountPercentage / 100)
+  //         : subtotalBeforeDiscount;
+
+  //     acc = acc + discountedPrice;
+
+  //     return acc;
+  //   }, 0);
+  //   return {
+  //     ...state,
+  //     total_amount,
+  //   };
+  // }
+
+  if (action.type === "TOTAL_CART_PRICE_ITEM") {
     const discountPercentage = 25;
 
-    let total_amount = state.cart.reduce((acc, cur) => {
-      let { price, quantity } = cur;
-      const subtotalBeforeDiscount = price * quantity;
-      const discountedPrice =
-        price > 99
-          ? subtotalBeforeDiscount * (1 - discountPercentage / 100)
-          : subtotalBeforeDiscount;
+    let { total_item, total_amount } = state.cart.reduce(
+      (acc, cur) => {
+        let { price, quantity } = cur;
 
-      acc = acc + discountedPrice;
+        acc.total_item += quantity;
 
-      return acc;
-    }, 0);
+        const subtotalBeforeDiscount = price * quantity;
+        const discountedPrice =
+          price > 99
+            ? subtotalBeforeDiscount * (1 - discountPercentage / 100)
+            : subtotalBeforeDiscount;
+
+        acc.total_amount += discountedPrice;
+
+        return acc;
+      },
+      {
+        total_item: 0,
+        total_amount: 0,
+      }
+    );
     return {
       ...state,
+      total_item,
       total_amount,
     };
   }
-
   return state;
 };
 
