@@ -5,7 +5,7 @@ import CartItem from "./CartItem";
 import { NavLink } from "react-router-dom";
 import { Button } from "../styles/Button";
 import FormatPrice from "../Helpers/FormatPrice";
-
+import { useAuth0 } from "@auth0/auth0-react";
 const Wrapper = styled.section`
   padding: 9rem 0;
 
@@ -205,6 +205,7 @@ const Wrapper = styled.section`
 
 const Cart = () => {
   const { cart, clearCart, total_amount, shipping_charges } = useCartContext();
+  const { isAuthenticated, user } = useAuth0();
 
   const adjustedShippingCharges =
     total_amount > 299 ? 0 : shipping_charges / 100;
@@ -231,6 +232,12 @@ const Cart = () => {
   return (
     <Wrapper>
       <div className="container">
+        {isAuthenticated && (
+          <div className="cart-user--profile">
+            <img src={user.profile} alt={user.name} />
+            <h3 className="cart-user--name">{user.name}</h3>
+          </div>
+        )}
         <div className="cart_heading grid grid-five-column">
           <p>Item</p>
           <p className="cart-hide">Price</p>

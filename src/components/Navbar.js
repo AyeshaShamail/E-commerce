@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { useCartContext } from "../utils/cartContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Nav = styled.nav`
   .navbar-lists {
@@ -60,7 +61,7 @@ const Nav = styled.nav`
       width: 2.5rem;
       height: 2.5rem;
       position: absolute;
-      background-color: ${({ theme }) => theme.colors.helper};
+      background-color: rgb(98 84 243);
       color: #fff;
       border-radius: 50%;
       display: grid;
@@ -160,9 +161,34 @@ const Nav = styled.nav`
   }
 `;
 
+const Button = styled.button`
+  text-decoration: none;
+  max-width: auto;
+  background-color: rgb(98 84 243);
+  color: rgb(255 255 255);
+  padding: 0.5rem;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    box-shadow: 0 2rem 2rem 0 rgb(132 144 255 / 30%);
+    box-shadow: ${({ theme }) => theme.colors.shadowSupport};
+    transform: scale(0.96);
+  }
+
+  a {
+    text-decoration: none;
+    color: rgb(255 255 255);
+    font-size: 1rem;
+  }
+`;
+
 const Navbar = () => {
   const [menuIcon, setMenuIcon] = useState();
   const { total_item } = useCartContext();
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
   return (
     <Nav>
       <div className={menuIcon ? "navbar active" : "navbar"}>
@@ -203,6 +229,29 @@ const Navbar = () => {
               Contact
             </NavLink>
           </li> */}
+
+          {isAuthenticated && <p>{user.name}</p>}
+
+          {isAuthenticated ? (
+            <li>
+              {
+                <Button
+                  onClick={() =>
+                    logout({
+                      logoutParams: { returnTo: window.location.origin },
+                    })
+                  }
+                >
+                  LOG OUT
+                </Button>
+              }
+            </li>
+          ) : (
+            <li>
+              {<Button onClick={() => loginWithRedirect()}>LOG IN</Button>}
+            </li>
+          )}
+
           <li>
             <NavLink
               to="/cart"
