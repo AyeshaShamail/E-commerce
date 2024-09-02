@@ -5,7 +5,11 @@ const CartContext = createContext();
 
 const getCartDataLocal = () => {
   const localCartData = localStorage.getItem("shamayaCart");
-  return localCartData ? JSON.parse(localCartData) : [];
+  // return localCartData ? JSON.parse(localCartData) : [];
+
+  const parseData = JSON.parse(localCartData);
+  if (!Array.isArray(parseData)) return [];
+  return parseData;
 };
 
 const initialState = {
