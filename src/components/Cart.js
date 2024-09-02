@@ -234,7 +234,7 @@ const Cart = () => {
       <div className="container">
         {isAuthenticated && (
           <div className="cart-user--profile">
-            <img src={user.profile} alt={user.name} />
+            <img src={user.picture} alt={user.name} />
             <h3 className="cart-user--name">{user.name}</h3>
           </div>
         )}
