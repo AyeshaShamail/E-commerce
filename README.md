@@ -9,7 +9,7 @@ Shopping cart: Add and remove items with ease.
 User authentication: Secure login and order management.
 
 Demo
-Check out the live demo of Shamaya: Shamaya E-commerce
+Check out the live demo of Shamaya: [Shamaya E-commerce](https://shamayacart.netlify.app/)
 
 Installation
 To get started with Shamaya locally, follow these steps:
